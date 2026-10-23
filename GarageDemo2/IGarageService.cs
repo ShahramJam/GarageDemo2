@@ -1,5 +1,4 @@
-﻿using GarageDemo2;
-namespace Garage1App;
+﻿namespace GarageDemo2;
 
 public interface IGarageService
 {

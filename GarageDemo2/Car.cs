@@ -1,4 +1,4 @@
-﻿namespace Garage1App;
+﻿namespace GarageDemo2;
 
 public sealed class Car : Vehicle
 {

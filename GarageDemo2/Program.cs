@@ -1,7 +1,7 @@
-﻿using GarageDemo2;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
-namespace Garage1App;
+namespace GarageDemo2;
 
 public static class Program
 {

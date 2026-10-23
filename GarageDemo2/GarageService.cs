@@ -1,7 +1,6 @@
-﻿using GarageDemo2;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 
-namespace Garage1App;
+namespace GarageDemo2;
 
 public sealed class GarageService : IGarageService
 {
@@ -29,7 +28,7 @@ public sealed class GarageService : IGarageService
     {
         try
         {
-            return _garage?.Vehicles ?? Array.Empty<Vehicle>();
+            return _garage?.Vehicles ?? new List<Vehicle>();
         }
         catch (Exception exception)
         {
@@ -191,8 +190,7 @@ public sealed class GarageService : IGarageService
                 resultat.Add(vehicle);
             }
 
-            return resultat.ToArray();
-
+            return resultat;
 
         }
         catch (Exception exception)

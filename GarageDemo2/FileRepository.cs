@@ -1,7 +1,6 @@
-using GarageDemo2;
 using System.Text.Json;
 
-namespace Garage1App;
+namespace GarageDemo2;
 
 public sealed class FileRepository : IRepository
 {

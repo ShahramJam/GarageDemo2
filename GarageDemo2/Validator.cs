@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Garage1App
+namespace GarageDemo2
 {
     public static class Validator
     {

@@ -1,4 +1,4 @@
-﻿ 
+﻿
 namespace GarageDemo2;
 
 public sealed class Boat : Vehicle

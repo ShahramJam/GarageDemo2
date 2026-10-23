@@ -2,7 +2,8 @@
 
 public sealed class Garage
 {
-    private readonly Vehicle?[] _vehicles;
+    private readonly List<Vehicle?> _vehicles;
+    private readonly int _capacity;
 
     public Garage(int capacity)
     {
@@ -13,42 +14,26 @@ public sealed class Garage
                 "Kapaciteten måste vara större än noll.");
         }
 
-        _vehicles = new Vehicle[capacity];
+        _capacity = capacity;
+        _vehicles = new List<Vehicle?>(capacity);
     }
 
-    public int Capacity => _vehicles.Length;
+    public int Capacity => _capacity;
 
-    public int Count
-    {
-        get
-        {
-            int count = 0;
+    public int Count => _vehicles.Count(vehicle => vehicle is not null);
 
-            foreach (Vehicle? vehicle in _vehicles)
-            {
-                if (vehicle is not null)
-                {
-                    count++;
-                }
-            }
-
-            return count;
-        }
-    }
-
-    // Returnera en kopia så att anroparen inte kan ändra garagets array.
+    // Returnera en kopia så att anroparen inte kan ändra garagets lista.
     public IReadOnlyList<Vehicle> Vehicles
     {
         get
         {
-            Vehicle[] vehicles = new Vehicle[Count];
-            int index = 0;
+            List<Vehicle> vehicles = new List<Vehicle>(Count);
 
             foreach (Vehicle? vehicle in _vehicles)
             {
                 if (vehicle is not null)
                 {
-                    vehicles[index++] = vehicle;
+                    vehicles.Add(vehicle);
                 }
             }
 
@@ -64,24 +49,13 @@ public sealed class Garage
             return false;
         }
 
-        int emptyIndex = -1;
-
-        for (int i = 0; i < _vehicles.Length; i++)
-        {
-            if (_vehicles[i] is null)
-            {
-                emptyIndex = i;
-                break;
-            }
-        }
-
-        if (emptyIndex < 0)
+        if (Count >= _capacity)
         {
             message = "Garaget är fullt.";
             return false;
         }
 
-        _vehicles[emptyIndex] = vehicle;
+        _vehicles.Add(vehicle);
         message = $"{vehicle.RegistrationNumber} har parkerats.";
         return true;
     }
@@ -105,7 +79,7 @@ public sealed class Garage
 
     public Vehicle? Remove(string registrationNumber)
     {
-        for (int i = 0; i < _vehicles.Length; i++)
+        for (int i = 0; i < _vehicles.Count; i++)
         {
             if (_vehicles[i] is Vehicle vehicle &&
                 string.Equals(
@@ -113,7 +87,7 @@ public sealed class Garage
                     registrationNumber,
                     StringComparison.OrdinalIgnoreCase))
             {
-                _vehicles[i] = null;
+                _vehicles.RemoveAt(i);
                 return vehicle;
             }
         }

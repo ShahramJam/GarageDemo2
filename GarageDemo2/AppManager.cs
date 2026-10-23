@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-namespace Garage1App;
+namespace GarageDemo2;
 
 public sealed class AppManager : IAppManager
 {
